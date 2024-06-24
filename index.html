@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f6f5f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 
+                        0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 400px;
+            max-width: 100%;
+            min-height: 300px;
+        }
+
+        .form-container {
+            padding: 50px;
+        }
+
+        form {
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        input {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container input {
+            padding-right: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid #9aff6b;
+            background-color: #6eff2b;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #97fc68;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form id="signInForm">
+                <h1>Sign in</h1>
+                <input type="text" placeholder="Username" id="signInUsername" required />
+                <div class="password-container">
+                    <input type="password" placeholder="Password" id="signInPassword" required />
+                    <span class="toggle-password" onclick="togglePasswordVisibility()"></span>
+                </div>
+                <button type="submit">Sign In</button>
+                <div class="error" id="error"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const users = {
+            'user1': 'password1',
+            'user2': 'password2',
+            'user3': 'password3'
+        };
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('signInUsername').value;
+            const password = document.getElementById('signInPassword').value;
+            const errorDiv = document.getElementById('error');
+            if (users[username] && users[username] === password) {
+                errorDiv.textContent = 'Login successful!';
+                errorDiv.style.color = 'green';
+                setTimeout(function() {
+                window.location.href = 'index2.html';
+                }, 1111);
+                
+            } else {
+                errorDiv.textContent = 'Invalid username or password';
+                errorDiv.style.color = 'red';
+            }
+        });
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('signInPassword');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+    </script>
+</body>
+</html>
